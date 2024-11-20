@@ -1,0 +1,23 @@
+    {{template "header"}}
+    <form action="/distance" method="post">
+        <label for="num">Value to convert:</label>
+        <input type="number" name="num" id="num" step="any">
+        <label for="from">Unit to convert from:</label>
+        <select name="from" id="from">
+            <option value="meter">Meter</option>
+            <option value="kilometer">Kilometer</option>
+            <option value="inch">Inch</option>
+            <option value="foot">Foot</option>
+            <option value="mile">Mile</option>
+        </select>
+        <label for="to">Unit to convert to:</label>
+        <select name="to" id="to">
+            <option value="meter">Meter</option>
+            <option value="kilometer">Kilometer</option>
+            <option value="inch">Inch</option>
+            <option value="foot">Foot</option>
+            <option value="mile">Mile</option>
+        </select>
+        <input type="submit" value="submit">
+    </form>
+    {{template "footer"}}

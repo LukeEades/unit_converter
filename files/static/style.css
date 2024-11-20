@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+}
+
+#content{
+    width: 66%;
+    background-color: white;
+    border-radius: 0 0 1rem 1rem;
+}
+
+header{
+    display: flex;
+    justify-content: space-around;
+}

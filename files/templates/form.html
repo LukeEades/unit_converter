@@ -1,0 +1,21 @@
+{{template "header" .Page}}
+
+<form action="/{{.Page}}" method="post">
+    <label for="num">Value to convert:</label>
+    <input type="number" step="any" name="num" id="num">
+    <label for="from">Unit to convert from:</label>
+    <select name="from" id="from">
+        {{range .Values}}
+        <option value="{{.}}">{{.}}</option>
+        {{end}}
+    </select>
+    <label for="to">Value to convert to:</label>
+    <select name="to" id="to">
+        {{range .Values}}
+        <option value="{{.}}">{{.}}</option>
+        {{end}}
+    </select>
+    <input type="submit">
+</form>
+
+{{template "footer"}}

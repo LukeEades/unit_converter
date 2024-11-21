@@ -8,6 +8,13 @@ import (
 	"strconv"
 )
 
+type Info struct {
+	Page   string
+	Values []string
+}
+
+var distInfo Info = Info{"distance", []string{"inch", "foot", "mile", "meter", "kilometer"}}
+
 var distInMeters map[string]float64 = map[string]float64{
 	"inch":      .0254,
 	"foot":      .3048,
@@ -22,6 +29,8 @@ var weightInGrams map[string]float64 = map[string]float64{
 	"ounce":    28.35,
 	"pound":    453.592,
 }
+
+var weightInfo Info = Info{"weight", []string{"gram", "kilogram", "ounce", "pound"}}
 
 var tempInCelsius map[string]func(float64, bool) float64 = map[string]func(float64, bool) float64{
 	"fahrenheit": func(num float64, from bool) float64 {
@@ -41,19 +50,17 @@ var tempInCelsius map[string]func(float64, bool) float64 = map[string]func(float
 	},
 }
 
-var distTemplate *template.Template
+var tempInfo Info = Info{"temperature", []string{"fahrenheit", "celsius", "kelvin"}}
+
 var resultTemplate *template.Template
 var errorTemplate *template.Template
-var weightTemplate *template.Template
-var tempTemplate *template.Template
+var formTemplate *template.Template
 
 func main() {
 
-	distTemplate = template.Must(template.ParseFiles("./files/templates/distance.html", "./files/templates/header.html", "./files/templates/footer.html"))
 	errorTemplate = template.Must(template.ParseFiles("./files/templates/error.html", "./files/templates/header.html", "./files/templates/footer.html"))
 	resultTemplate = template.Must(template.ParseFiles("./files/templates/result.html", "./files/templates/header.html", "./files/templates/footer.html"))
-	weightTemplate = template.Must(template.ParseFiles("./files/templates/weight.html", "./files/templates/header.html", "./files/templates/footer.html"))
-	tempTemplate = template.Must(template.ParseFiles("./files/templates/temperature.html", "./files/templates/header.html", "./files/templates/footer.html"))
+	formTemplate = template.Must(template.ParseFiles("./files/templates/form.html", "./files/templates/header.html", "./files/templates/footer.html"))
 
 	http.HandleFunc("GET /distance", handleDistForm)
 	http.HandleFunc("POST /distance", handleDistResult)
@@ -66,7 +73,7 @@ func main() {
 }
 
 func handleDistForm(w http.ResponseWriter, r *http.Request) {
-	err := distTemplate.Execute(w, nil)
+	err := formTemplate.Execute(w, distInfo)
 	if err != nil {
 		log.Fatal(err)
 		return
@@ -74,7 +81,7 @@ func handleDistForm(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleWeightForm(w http.ResponseWriter, r *http.Request) {
-	err := weightTemplate.Execute(w, nil)
+	err := formTemplate.Execute(w, weightInfo)
 	if err != nil {
 		log.Fatal(err)
 		return
@@ -82,7 +89,7 @@ func handleWeightForm(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleTempForm(w http.ResponseWriter, r *http.Request) {
-	err := tempTemplate.Execute(w, nil)
+	err := formTemplate.Execute(w, tempInfo)
 	if err != nil {
 		log.Fatal(err)
 		return

@@ -10,8 +10,9 @@
 <body>
     <div id="content">
         <header>
-            <a href="/distance">Distance</a>
-            <a href="/weight">Weight</a>
-            <a href="/temperature">Temperature</a>
+            <a href="/distance" {{if eq . "distance"}}class="selected"{{end}}><h2>Distance</h2></a>
+            <a href="/weight" {{if eq . "weight"}}class="selected"{{end}}><h2>Weight</h2></a>
+            <a href="/temperature" {{if eq . "temperature"}}class="selected"{{end}}><h2>Temperature</h2></a>
         </header>
+        <main>
 {{end}}

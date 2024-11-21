@@ -18,4 +18,34 @@ body{
 header{
     display: flex;
     justify-content: space-around;
+    background-color: white;
+}
+
+header > a {
+    text-decoration: none;
+    color: black;
+}
+
+header > a:hover {
+    color: grey;
+}
+
+.selected{
+    color: grey;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+form > *{
+    margin: 1rem;
 }
